@@ -1,7 +1,9 @@
 # Task Manager Restful App
 
 ## B4a's back-end challenge
-    - Task description:  Develop a task management application using back-end tecnologies to pratice Java and some frameworks/patterns for a challenge of B4A enterprise.
+
+### Task description:  
+Develop a task management application using back-end tecnologies to pratice Java and some frameworks/patterns for a challenge of B4A enterprise.
 
 ### Tecnologies used:
 
