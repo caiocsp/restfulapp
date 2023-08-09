@@ -1,0 +1,92 @@
+//Error tests
+//Create
+"teste1": {
+		  "day": 5,
+		  "description": "Testando data anterior - Erro 1",
+		  "month": 10,
+		  "name": "Tarefa teste 1",
+		  "year": 2022
+		}
+
+"teste2": {
+			"name": "Tarefa teste 2",
+			"day": 22,
+		  	"description": "Testando data após 2 anos - Erro 2",
+		  	"month": 1,
+		  	"year": 2026
+		}
+
+"teste3": {
+			"name": null,
+			"description": "Testando input nulo - Erro 4",
+			"day": 5,
+			"month": 10,
+			"year": 2022
+		}
+
+///Task/updateTask
+"teste4": {
+	 "id": 2,
+	 "name": "",
+	 "description": "Testando nome em branco - erro 5",
+	 "month": 10,
+	 "day": 15,
+	 "year": 2024
+}
+
+
+"teste5": {
+	 "id": 1,
+	 "name": "Tarefa teste 1",
+	 "description": "Testando mesmo nome - erro 6",
+	 "month": 10,
+	 "day": 15,
+	 "year": 2024
+}
+
+// /Task/updateName
+"teste8": {
+  "id": 2,
+  "name": null
+}
+
+// /Task/updateTaskDescription
+//Testando mesma descrição
+"teste9": {
+	"id": 1,
+	"description": "Teste de insert 1"
+}
+
+//Task description em branco
+"teste10": {
+	"id": 1,
+	"description": ""
+}
+
+// /Task/updateDeadline
+//data com valor nulo
+"teste11": {
+	  "id": 1,
+	  "day": null,
+	  "month": 10,
+	  "year": 2023
+}
+//Tarefa não encontrada
+"teste12": {
+	  "id": 20,
+	  "day": 10,
+	  "month": 10,
+	  "year": 2023
+}
+
+//Data inválida (anterior)
+"teste13": {
+	  "id": 1,
+	  "day": 22,
+	  "month": 7,
+	  "year": 2023
+}
+
+// /Task/delete/{taskId}
+//Deletar task inexistente:
+/Task/delete/35

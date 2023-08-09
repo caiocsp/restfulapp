@@ -1,0 +1,78 @@
+//Create
+"teste1": {
+		"name": "Tarefa teste 1",
+		"description": "Teste de insert 1",
+		"day": 5,
+		"month": 9,
+		"year": 2023
+	}
+
+"teste2": {
+		"name": "Tarefa teste 2",
+		"description": "Teste de insert 2",
+		"day": 10,
+		"month": 10,
+		"year": 2024
+	}
+
+"teste3": {
+		"name": "Tarefa teste 3",
+		"description": "Teste de insert 3",
+		"day": 5,
+		"month": 5,
+		"year": 2024
+	}
+
+"teste4": {
+		"name": "Tarefa teste 4",
+		"description": "Teste de insert 4",
+		"day": 2,
+		"month": 11,
+		"year": 2023
+	}
+
+"teste5": {
+		"name": "Tarefa teste 5",
+		"description": "Teste de insert 5",
+		"day": 2,
+		"month": 11,
+		"year": 2023
+	}
+
+
+// READ
+/Task/detail/2
+
+//Update 
+// /Task/updateTask
+"teste6": {
+		"id": 1,
+		"name": "Tarefa teste 1 - Update",
+		"description": "Teste de insert 1 - Update",
+		"day": 10,
+		"month": 9,
+		"year": 2023
+	}
+
+// /Task/updateName
+"teste7":{
+  "id": 2,
+  "name": "Tarefa teste 2 - Update"
+}
+
+// /Task/updateTaskDescription
+"teste8": {
+	"id": 5,
+  	"description": "Teste de update, Task 5",
+}
+
+// /Task/updateDeadline
+"teste9": {
+	"id": 4,
+	"day": 18,
+	"month": 12,
+	"year": 2023
+}
+
+//delete
+/Task/delete/3
