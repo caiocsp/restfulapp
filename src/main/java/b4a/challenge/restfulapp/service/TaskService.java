@@ -42,6 +42,14 @@ public class TaskService {
 		if(requestBody.getName() == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insira valor não nulo!");
 
+        if(requestBody.getName().length() > 25) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O nome deve conter até 25 caracteres!");
+        }
+
+        if(requestBody.getDescription().length() > 250) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A descrição deve conter até 250 caracteres!");
+        }
+
         if(!isValidDate(requestBody.getDay(), requestBody.getMonth(), requestBody.getYear()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data inválida!");
 
@@ -67,8 +75,17 @@ public class TaskService {
 
         Optional<Task> task = taskRepository.findById(requestBody.getId());
         
-		if(requestBody.getName() == null || requestBody.getDescription() == null)
+		if(requestBody.getName() == null || requestBody.getDescription() == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insira valor não nulo!");
+        }
+
+        if(requestBody.getName().length() > 25) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O nome deve conter até 25 caracteres!");
+        }
+
+        if(requestBody.getDescription().length() > 250) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A descrição deve conter até 250 caracteres!");
+        }
         
         if(task.isPresent()){
             //Checking the new Name
@@ -119,8 +136,13 @@ public class TaskService {
 
         Optional<Task> task = taskRepository.findById(requestBody.getId());
 
-        if(requestBody.getName() == null)
+        if(requestBody.getName() == null){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insira valor não nulo!");
+        }
+
+        if(requestBody.getName().length() > 25) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O nome deve conter até 25 caracteres!");
+        }
         
         if(task.isPresent()){
             //Checking the new Name
@@ -146,8 +168,13 @@ public class TaskService {
 
         Optional<Task> task = taskRepository.findById(requestBody.getId());
 
-        if(requestBody.getDescription() == null)
+        if(requestBody.getDescription() == null){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insira valor não nulo!");
+        }
+
+        if(requestBody.getDescription().length() > 250) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A descrição deve conter até 250 caracteres!");
+        }
         
         if(task.isPresent()){
             //Checking the new Name
