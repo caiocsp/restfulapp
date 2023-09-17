@@ -1,14 +1,11 @@
 package b4a.challenge.restfulapp.entity.request;
 
-import java.sql.Timestamp;
-
 import javax.validation.constraints.NotNull;
 
 public class CreateTaskRequest {
     
-    
-    private String name;
-    
+    @NotNull
+    private String name;  
     private String description;
     @NotNull
     private int day;

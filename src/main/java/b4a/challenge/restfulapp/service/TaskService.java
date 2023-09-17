@@ -21,11 +21,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import b4a.challenge.restfulapp.entity.Task;
+import b4a.challenge.restfulapp.entity.enums.TaskStatus;
 import b4a.challenge.restfulapp.entity.request.CreateTaskRequest;
 import b4a.challenge.restfulapp.entity.request.UpdateDeadlineOfTaskRequest;
 import b4a.challenge.restfulapp.entity.request.UpdateNameOfTaskRequest;
 import b4a.challenge.restfulapp.entity.request.UpdateTaskDescription;
 import b4a.challenge.restfulapp.entity.request.UpdateTaskRequest;
+import b4a.challenge.restfulapp.entity.request.UpdateTaskStatusRequest;
 import b4a.challenge.restfulapp.repository.TaskRepository;
 
 @Service
@@ -63,6 +65,7 @@ public class TaskService {
         }
 
         task.setName(requestBody.getName());
+        task.setTaskStatus(TaskStatus.NEW.id);
         task.setDescription(requestBody.getDescription());
         task.setDateCreated(new Timestamp(new Date().getTime()));
         taskRepository.save(task);
@@ -90,13 +93,20 @@ public class TaskService {
         if(task.isPresent()){
             //Checking the new Name
             if(requestBody.getName().equals(task.get().getName()))
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insira um nome diferente");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insira um nome diferente!");
             
             if(requestBody.getDescription().equals(task.get().getDescription()))
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insira uma descrição diferente!");
 
             if(requestBody.getName().equals(""))
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nome em branco");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nome em branco!");
+
+            if(requestBody.getDescription().equals(""))
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Descrição em branco!");
+            
+            if(requestBody.getTaskStatus() < TaskStatus.NEW.id || requestBody.getTaskStatus() > TaskStatus.CANCELLED.id) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Status inválido!");
+            }
 
             if(!isValidDate(requestBody.getDay(), requestBody.getMonth(), requestBody.getYear()))
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data inválida!");
@@ -116,6 +126,7 @@ public class TaskService {
             }
 
             task.get().setName(requestBody.getName());
+            task.get().setTaskStatus(requestBody.getTaskStatus());
             task.get().setDescription(requestBody.getDescription());
             task.get().setDeadline(Timestamp.valueOf(deadline));
 
@@ -153,6 +164,28 @@ public class TaskService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nome em branco");
             
             task.get().setName(requestBody.getName());
+            taskRepository.save(task.get());
+
+            HashMap<String, Object> result = new  HashMap<String, Object> ();
+            result.put("result", task);
+            return result;                
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
+
+    }
+
+    public HashMap<String, Object> updateTaskStatus(UpdateTaskStatusRequest requestBody) {
+
+        Optional<Task> task = taskRepository.findById(requestBody.getId());
+
+        if(requestBody.getTaskStatus() < TaskStatus.NEW.id || requestBody.getTaskStatus() > TaskStatus.CANCELLED.id) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Status inválido!");
+        }
+
+        if(task.isPresent()) {
+            
+            task.get().setTaskStatus(requestBody.getTaskStatus());
             taskRepository.save(task.get());
 
             HashMap<String, Object> result = new  HashMap<String, Object> ();
@@ -246,6 +279,14 @@ public class TaskService {
             return task.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
+    }
+
+    public List<Task> getTaskByStatus(Integer taskStatus) {
+        List<Task> task = taskRepository.findByTaskStatus(taskStatus);
+        if(task.size() > 0){
+            return task;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa(s) não encontrada(s)");
     }
 
     public HashMap<String, Object> deleteTaskById(Long taskId) {

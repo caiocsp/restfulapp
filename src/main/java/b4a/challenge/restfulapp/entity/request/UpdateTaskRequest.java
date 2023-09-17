@@ -17,6 +17,9 @@ public class UpdateTaskRequest {
     private String name;
     @NotNull
     @Column
+    private Integer taskStatus;
+    @NotNull
+    @Column
     private String description;
     @NotNull
     @Column
@@ -42,6 +45,14 @@ public class UpdateTaskRequest {
 
     public void setName(String nome) {
         this.name = nome;
+    }
+
+    public Integer getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(Integer taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     public void setDescription(String description) {

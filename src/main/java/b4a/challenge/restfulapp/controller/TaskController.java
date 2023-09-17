@@ -22,6 +22,7 @@ import b4a.challenge.restfulapp.entity.request.UpdateDeadlineOfTaskRequest;
 import b4a.challenge.restfulapp.entity.request.UpdateNameOfTaskRequest;
 import b4a.challenge.restfulapp.entity.request.UpdateTaskDescription;
 import b4a.challenge.restfulapp.entity.request.UpdateTaskRequest;
+import b4a.challenge.restfulapp.entity.request.UpdateTaskStatusRequest;
 import b4a.challenge.restfulapp.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 
@@ -32,7 +33,7 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/detail/allTasks", produces=MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value="Returns all tasks")
     public ResponseEntity<Object> getTasks() {
         List<Task> result = taskService.getTasks();
@@ -43,6 +44,13 @@ public class TaskController {
     @ApiOperation(value="Return task detail by id")
     public ResponseEntity<Object> getTaskById(@PathVariable Long taskId){
         Task result = taskService.getTaskById(taskId);
+        return ResponseEntity.ok().body(RestResponse.response(result));
+    }
+
+    @GetMapping(value="/detail/byStatus/{taskStatusId}", produces=MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Return task detail list by status")
+    public ResponseEntity<Object> getByStatus(@PathVariable Integer taskStatusId){
+        List<Task> result = taskService.getTaskByStatus(taskStatusId);
         return ResponseEntity.ok().body(RestResponse.response(result));
     }
 
@@ -71,6 +79,13 @@ public class TaskController {
     @ApiOperation(value="Update task's name")
     public ResponseEntity<Object> updateTaskById(@RequestBody UpdateNameOfTaskRequest requestBody) {
         HashMap<String, Object> result = taskService.updateNameOfTask(requestBody);
+        return ResponseEntity.ok().body(RestResponse.response(result));
+    }
+
+    @PutMapping(value="/updateTaskStatus", produces=MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Update task's status")
+    public ResponseEntity<Object> updateTaskById(@RequestBody UpdateTaskStatusRequest requestBody) {
+        HashMap<String, Object> result = taskService.updateTaskStatus(requestBody);
         return ResponseEntity.ok().body(RestResponse.response(result));
     }
 

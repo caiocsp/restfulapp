@@ -20,6 +20,9 @@ public class Task {
     private String name;
 
     @Column
+    private Integer taskStatus;
+
+    @Column
     private String description;
 
     @Column
@@ -38,6 +41,14 @@ public class Task {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(Integer taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     public void setDescription(String description) {
