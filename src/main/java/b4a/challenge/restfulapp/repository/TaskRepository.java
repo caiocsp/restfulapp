@@ -1,5 +1,6 @@
 package b4a.challenge.restfulapp.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,4 +14,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     Optional<Task> findById(Long id);
 
     List<Task> findByTaskStatus(Integer id);
+
+    List<Task> findByDateCreated(Timestamp searchDate);
+
+
 }

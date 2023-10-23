@@ -1,8 +1,6 @@
 package b4a.challenge.restfulapp.service;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.task.TaskExecutorCustomizer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -55,7 +52,7 @@ public class TaskService {
         if(!isValidDate(requestBody.getDay(), requestBody.getMonth(), requestBody.getYear()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data inválida!");
 
-        String deadline = requestBody.getYear() +  "-" + requestBody.getMonth() + "-" + requestBody.getDay() + " 23:59:59.000000000";
+        String deadline = dateToString(requestBody.getDay(), requestBody.getMonth(), requestBody.getYear());
 		task.setDeadline(Timestamp.valueOf(deadline));
 
         Timestamp today = new Timestamp(new Date().getTime());
@@ -111,7 +108,7 @@ public class TaskService {
             if(!isValidDate(requestBody.getDay(), requestBody.getMonth(), requestBody.getYear()))
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data inválida!");
 
-            String deadline = requestBody.getYear() +  "-" + requestBody.getMonth() + "-" + requestBody.getDay() + " 23:59:59.000000000";
+            String deadline = dateToString(requestBody.getDay(), requestBody.getMonth(), requestBody.getYear());
 
             Timestamp today = new Timestamp(new Date().getTime());
 
@@ -243,7 +240,7 @@ public class TaskService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Valor nulo aplicado");
             }
 
-            String deadline = requestBody.getYear() +  "-" + requestBody.getMonth() + "-" + requestBody.getDay() + " 23:59:59.000000000";
+            String deadline = dateToString(requestBody.getDay(), requestBody.getMonth(), requestBody.getYear());
 
             Timestamp today = new Timestamp(new Date().getTime());
 
@@ -342,6 +339,18 @@ public class TaskService {
             return false;
             
         return true;
+    }
+
+    public List<Task> getTasksByDate(int requestDay, int requestMonth, int requestYear) {
+        if(isValidDate(requestDay, requestMonth, requestYear)){
+            String deadline = dateToString(requestDay, requestMonth, requestYear);
+            return taskRepository.findByDateCreated(Timestamp.valueOf(deadline));
+        }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data Inválida");
+    }
+
+    public String dateToString(int requestDay, int requestMonth, int requestYear) {
+        return requestYear +  "-" + requestMonth + "-" + requestDay + " 20:59:59.000000000";
     }
 
 }
