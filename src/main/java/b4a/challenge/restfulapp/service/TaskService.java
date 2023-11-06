@@ -343,14 +343,18 @@ public class TaskService {
 
     public List<Task> getTasksByDate(int requestDay, int requestMonth, int requestYear) {
         if(isValidDate(requestDay, requestMonth, requestYear)){
-            String deadline = dateToString(requestDay, requestMonth, requestYear);
-            return taskRepository.findByDateCreated(Timestamp.valueOf(deadline));
+            String deadline = dateToString(requestDay, requestMonth, requestYear, " 23:59:59.999");
+            return taskRepository.findByDeadline(Timestamp.valueOf(deadline));
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data Inválida");
     }
 
     public String dateToString(int requestDay, int requestMonth, int requestYear) {
-        return requestYear +  "-" + requestMonth + "-" + requestDay + " 20:59:59.000000000";
+        return requestYear +  "-" + requestMonth + "-" + requestDay + " 20:59:59.999";
+    }
+
+    public String dateToString(int requestDay, int requestMonth, int requestYear, String time) {
+        return requestYear +  "-" + requestMonth + "-" + requestDay + time;
     }
 
 }
