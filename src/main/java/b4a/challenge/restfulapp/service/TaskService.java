@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import b4a.challenge.restfulapp.entity.Tag;
 import b4a.challenge.restfulapp.entity.Task;
 import b4a.challenge.restfulapp.entity.enums.TaskStatus;
 import b4a.challenge.restfulapp.entity.request.CreateTaskRequest;
@@ -25,6 +26,7 @@ import b4a.challenge.restfulapp.entity.request.UpdateNameOfTaskRequest;
 import b4a.challenge.restfulapp.entity.request.UpdateTaskDescription;
 import b4a.challenge.restfulapp.entity.request.UpdateTaskRequest;
 import b4a.challenge.restfulapp.entity.request.UpdateTaskStatusRequest;
+import b4a.challenge.restfulapp.repository.TagRepository;
 import b4a.challenge.restfulapp.repository.TaskRepository;
 
 @Service
@@ -32,6 +34,9 @@ public class TaskService {
 
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     public Task createTask(CreateTaskRequest requestBody) {
 
@@ -323,6 +328,36 @@ public class TaskService {
         }
 
 	}
+
+    public HashMap<String, Object> createTag(String tagName){
+        Optional<Tag> tag = tagRepository.findByName(tagName);
+        if(!tag.isPresent()){
+            HashMap<String, Object> result = new  HashMap<String, Object>();
+                Tag newTag = new Tag();
+                newTag.setName(tagName);
+                result.put("Tag", tagRepository.save(newTag));
+                return result;
+        }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tag já existente!");
+    }
+
+    public HashMap<String, Object> addTagTotask(Long taskId, String tagName) {
+        Optional<Task> task = taskRepository.findById(taskId);
+        if(task.isPresent()){
+            Tag tag = tagRepository.findByName(tagName).orElseGet(() -> {
+                Tag newTag = new Tag();
+                newTag.setName(tagName);
+                return tagRepository.save(newTag);
+            });
+
+            HashMap<String, Object> result = new  HashMap<String, Object>();
+    
+            task.get().getTags().add(tag);
+            result.put("Task", taskRepository.save(task.get()));
+            return result;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task não encontrada!");
+    }
 
     public boolean isValidDate(int requestDay, int requestMonth, int requestYear) {
     

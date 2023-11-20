@@ -1,12 +1,18 @@
 package b4a.challenge.restfulapp.entity;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Task {
@@ -30,6 +36,10 @@ public class Task {
 
     @Column
     private Timestamp dateCreated;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "task_tags", joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -78,6 +88,13 @@ public class Task {
     public void setDateCreated(Timestamp dateCreated) {
         this.dateCreated = dateCreated;
     }
+    
+    public Set<Tag> getTags() {
+        return tags;
+    }
 
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
     
 }
