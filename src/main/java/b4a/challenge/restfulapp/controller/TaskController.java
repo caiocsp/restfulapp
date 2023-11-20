@@ -54,6 +54,13 @@ public class TaskController {
         return ResponseEntity.ok().body(RestResponse.response(result));
     }
 
+    @GetMapping(value="/detail/byDateCreated/", produces=MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Return task detail list by dateCreated")
+    public ResponseEntity<Object> getTasksByDate(@RequestParam("Year (YYYY)") int searchYear, @RequestParam("Month (MM)") int searchMonth, @RequestParam("Day (DD)") int searchDay) {
+        List<Task> result = taskService.getTasksByDate(searchDay, searchMonth, searchYear);
+        return ResponseEntity.ok().body(RestResponse.response(result));
+    }
+
     @GetMapping(value="/paginatedTasks", produces=MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value="Returns tasks paginated")
     public ResponseEntity<Object> getTaskPaginated(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int pageSize){
