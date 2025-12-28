@@ -1,4 +1,4 @@
-package b4a.challenge.restfulapp.entity.request;
+package caiocsp.project.restfulapp.entity.request;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class UpdateTaskRequest {
-    
+
     @Id
     @NotNull
     @Column
@@ -31,11 +31,11 @@ public class UpdateTaskRequest {
     @Column
     private int year;
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -97,5 +97,4 @@ public class UpdateTaskRequest {
         this.year = year;
     }
 
-    
 }

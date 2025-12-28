@@ -1,4 +1,4 @@
-package b4a.challenge.restfulapp.entity;
+package caiocsp.project.restfulapp.entity;
 
 import java.sql.Timestamp;
 
@@ -10,11 +10,11 @@ import javax.persistence.Id;
 
 @Entity
 public class Task {
-    
+
     @Id
     @Column
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column
     private String name;
@@ -79,5 +79,4 @@ public class Task {
         this.dateCreated = dateCreated;
     }
 
-    
 }
