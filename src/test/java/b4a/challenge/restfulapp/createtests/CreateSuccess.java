@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import b4a.challenge.restfulapp.entity.Task;
-import b4a.challenge.restfulapp.entity.request.CreateTaskRequest;
-import b4a.challenge.restfulapp.service.TaskService;
+import caiocsp.project.restfulapp.entity.Task;
+import caiocsp.project.restfulapp.entity.request.CreateTaskRequest;
+import caiocsp.project.restfulapp.service.TaskService;
 
 @SpringBootTest
 public class CreateSuccess {
 
     @Autowired
     TaskService taskService;
-    
+
     @Test
     public void createSuccessTest() {
         CreateTaskRequest task = new CreateTaskRequest();
@@ -28,8 +28,7 @@ public class CreateSuccess {
         Task newTask = taskService.createTask(task);
 
         assertEquals(newTask.getName(), "Teste 1 - Sucesso!");
-        
-    }
 
+    }
 
 }

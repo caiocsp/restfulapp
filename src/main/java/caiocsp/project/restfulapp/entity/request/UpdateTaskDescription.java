@@ -1,22 +1,21 @@
-package b4a.challenge.restfulapp.entity.request;
+package caiocsp.project.restfulapp.entity.request;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 public class UpdateTaskDescription {
-    
+
     @Id
     @NotNull
     private Long id;
     @NotNull
     private String description;
 
-
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 

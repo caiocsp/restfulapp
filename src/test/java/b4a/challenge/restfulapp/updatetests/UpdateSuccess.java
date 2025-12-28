@@ -4,17 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
-import org.h2.command.dml.Update;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import b4a.challenge.restfulapp.entity.Task;
-import b4a.challenge.restfulapp.entity.request.CreateTaskRequest;
-import b4a.challenge.restfulapp.entity.request.UpdateNameOfTaskRequest;
-import b4a.challenge.restfulapp.entity.request.UpdateTaskRequest;
-import b4a.challenge.restfulapp.repository.TaskRepository;
-import b4a.challenge.restfulapp.service.TaskService;
+import caiocsp.project.restfulapp.entity.Task;
+import caiocsp.project.restfulapp.entity.request.CreateTaskRequest;
+import caiocsp.project.restfulapp.entity.request.UpdateNameOfTaskRequest;
+import caiocsp.project.restfulapp.entity.request.UpdateTaskRequest;
+import caiocsp.project.restfulapp.repository.TaskRepository;
+import caiocsp.project.restfulapp.service.TaskService;
 
 @SpringBootTest
 public class UpdateSuccess {
@@ -24,9 +23,9 @@ public class UpdateSuccess {
 
     @Autowired
     private TaskRepository taskRepository;
-    
+
     @Test
-    public void updateTaskNameSuccess(){
+    public void updateTaskNameSuccess() {
         CreateTaskRequest task = new CreateTaskRequest();
 
         task.setName("Teste 1 - Update Sucesso!");
@@ -36,8 +35,8 @@ public class UpdateSuccess {
         task.setYear(2024);
         taskService.createTask(task);
 
-        UpdateTaskRequest updateParameter = new UpdateTaskRequest(1L,"Teste 1 de Update SUCESSO","Nova descrição!",
-        22, 10, 2023);
+        UpdateTaskRequest updateParameter = new UpdateTaskRequest(1L, "Teste 1 de Update SUCESSO", "Nova descrição!",
+                22, 10, 2023);
         taskService.updateTask(updateParameter);
         Optional<Task> taskUpdated = taskRepository.findById(1L);
 
@@ -45,7 +44,7 @@ public class UpdateSuccess {
     }
 
     @Test
-    public void updateTaskDescriptionSuccess(){
+    public void updateTaskDescriptionSuccess() {
         CreateTaskRequest task = new CreateTaskRequest();
 
         task.setName("Teste 1 - Update Sucesso!");
@@ -63,5 +62,5 @@ public class UpdateSuccess {
 
         assertEquals(updateParameter.getName(), taskUpdated.get().getName());
     }
-    
+
 }
