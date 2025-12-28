@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.server.ResponseStatusException;
 
-import b4a.challenge.restfulapp.service.TaskService;
-
+import caiocsp.project.restfulapp.service.TaskService;
 
 @SpringBootTest
 public class DeleteFailed {
@@ -17,9 +16,9 @@ public class DeleteFailed {
     TaskService taskService;
 
     @Test
-    public void failDeleteTest(){
+    public void failDeleteTest() {
 
-        assertThrows(ResponseStatusException.class , () -> taskService.deleteTaskById(5L));
+        assertThrows(ResponseStatusException.class, () -> taskService.deleteTaskById(5L));
 
     }
 
