@@ -1,17 +1,16 @@
 package caiocsp.project.restfulapp.entity.request;
 
-import javax.validation.constraints.NotNull;
+import org.springframework.lang.NonNull;
 
 public class UpdateDeadlineOfTaskRequest {
 
-    @NotNull
+    @NonNull
     private Long id;
-    @NotNull
-    @NotNull
+    @NonNull
     private int day;
-    @NotNull
+    @NonNull
     private int Month;
-    @NotNull
+    @NonNull
     private int Year;
 
     public Long getId() {
