@@ -1,4 +1,4 @@
-package b4a.challenge.restfulapp.entity;
+package caiocsp.project.restfulapp.entity;
 
 import java.sql.Timestamp;
 

@@ -1,4 +1,4 @@
-package b4a.challenge.restfulapp.entity.request;
+package caiocsp.project.restfulapp.entity.request;
 
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package b4a.challenge.restfulapp;
+package caiocsp.project.restfulapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

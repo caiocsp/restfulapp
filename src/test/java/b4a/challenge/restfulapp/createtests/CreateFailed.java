@@ -7,15 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.server.ResponseStatusException;
 
-import b4a.challenge.restfulapp.entity.request.CreateTaskRequest;
-import b4a.challenge.restfulapp.service.TaskService;
+import caiocsp.project.restfulapp.entity.request.CreateTaskRequest;
+import caiocsp.project.restfulapp.service.TaskService;
 
 @SpringBootTest
 public class CreateFailed {
 
     @Autowired
     private TaskService taskService;
-
 
     @Test
     public void nullNameErrorTest() {
@@ -27,8 +26,8 @@ public class CreateFailed {
         task.setMonth(10);
         task.setYear(2023);
 
-        assertThrows(ResponseStatusException.class , () -> taskService.createTask(task));
-        
+        assertThrows(ResponseStatusException.class, () -> taskService.createTask(task));
+
     }
 
     @Test
@@ -41,8 +40,8 @@ public class CreateFailed {
         task.setMonth(10);
         task.setYear(2026);
 
-        assertThrows(ResponseStatusException.class , () -> taskService.createTask(task));
-        
+        assertThrows(ResponseStatusException.class, () -> taskService.createTask(task));
+
     }
 
 }

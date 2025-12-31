@@ -1,12 +1,12 @@
-package b4a.challenge.restfulapp.entity.request;
+package caiocsp.project.restfulapp.entity.request;
 
 import jakarta.validation.constraints.NotNull;
 
-public class UpdateDeadlineOfTaskRequest {
+public class CreateTaskRequest {
 
     @NotNull
-    private Long id;
-    @NotNull
+    private String name;
+    private String description;
     @NotNull
     private int day;
     @NotNull
@@ -14,12 +14,20 @@ public class UpdateDeadlineOfTaskRequest {
     @NotNull
     private int Year;
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public int getDay() {
