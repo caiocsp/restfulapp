@@ -1,11 +1,11 @@
 package b4a.challenge.restfulapp.entity.request;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateTaskRequest {
-    
+
     @NotNull
-    private String name;  
+    private String name;
     private String description;
     @NotNull
     private int day;
@@ -54,6 +54,4 @@ public class CreateTaskRequest {
         Year = year;
     }
 
-
-    
 }

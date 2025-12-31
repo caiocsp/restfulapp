@@ -1,7 +1,6 @@
 package b4a.challenge.restfulapp.entity.request;
 
-import javax.validation.constraints.NotNull;
-
+import jakarta.validation.constraints.NotNull;
 
 public class UpdateDeadlineOfTaskRequest {
 
@@ -15,11 +14,11 @@ public class UpdateDeadlineOfTaskRequest {
     @NotNull
     private int Year;
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,5 +45,5 @@ public class UpdateDeadlineOfTaskRequest {
     public void setYear(int year) {
         Year = year;
     }
-    
+
 }
