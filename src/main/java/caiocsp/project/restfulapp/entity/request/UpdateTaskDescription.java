@@ -1,7 +1,7 @@
 package caiocsp.project.restfulapp.entity.request;
 
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 public class UpdateTaskDescription {
 
